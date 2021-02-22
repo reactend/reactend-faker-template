@@ -11,39 +11,34 @@ import {
 
 const ExpressApp = () => (
   <App port={process.env.PORT || 3000}>
-    <Logger mode="dev" disabled={isProd} />
-    <Router path="/api">
+    <Logger mode="dev" />
+    <Router path="/">
       <Get path="/users">
         <Res.Faker
-          length={10}
+          length={5}
           locale="en"
           map={{
-            user: {
+            userId: "random.uuid",
+            isAdmin: false,
+            profile: {
               fullName: "name.findName",
-              avatar: "image.imageUrl",
+              avatar: "image.people",
               registeredAt: "date.past",
             },
-            orders: [
-              {
-                id: "random.uuid",
-                name: "commerce.productName",
-                color: "commerce.color",
-              },
-              {
-                id: "random.uuid",
-                name: "commerce.productName",
-                color: "commerce.color",
-              },
-            ],
+            orders: Array.from({ length: 3 }, () => ({
+              id: "random.uuid",
+              name: "commerce.productName",
+              color: "commerce.color",
+            })),
           }}
         />
       </Get>
-      <Post path="/news">
+      <Post path="/post">
         <Res.Faker
           map={{
             title: "lorem.sentence",
             body: "lorem.paragraphs",
-            cover: "image.lorempixel",
+            image: "image.city",
             createdAt: "date.past",
           }}
         />
