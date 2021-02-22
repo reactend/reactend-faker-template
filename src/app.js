@@ -13,6 +13,9 @@ const ExpressApp = () => (
   <App port={process.env.PORT || 3000}>
     <Logger mode="dev" />
     <Router path="/">
+      <Get>
+        <Res.Redirect path="/users" />
+      </Get>
       <Get path="/users">
         <Res.Faker
           length={5}
